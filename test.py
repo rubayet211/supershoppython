@@ -1,0 +1,2 @@
+
+print(current_date)
