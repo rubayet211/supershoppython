@@ -1,12 +1,32 @@
 from person import Person
 from product import Product
 from utility import *
+import random
 
 showProduct = Product()
 
 class Customer(Person):
     def __init__(self)->None:
         super().__init__()
+
+    
+    def register_customer(self, name, phone_number, address, dob):
+        self.name = name
+        self.phone_number = phone_number
+        self.address = address
+        self.dob = dob
+        self.customer_id = self.generate_customer_id()
+        customer_info = f"{self.customer_id}|{self.name}|{self.phone_number}|{self.address}|{self.dob}\n"
+        with open(userFilePath, "a") as file:
+            file.write(customer_info)
+        print(f"Customer {self.name} registered successfully with ID {self.customer_id}")
+
+    def generate_customer_id(self):
+        with open(userFilePath, "r") as file:
+            lines = file.readlines()
+        customer_id = f"cust-{random.randint(1, 1000)}"
+        return customer_id
+
 
     def BrowseProducts(self):
         print("Available Products")

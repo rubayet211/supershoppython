@@ -1,7 +1,5 @@
 from utility import *
 
-
-
 class Product:
     def __init__(self):
         pass
@@ -83,10 +81,22 @@ class Product:
 
 
     def checkout_product(self, product_id, name, price, quantity, category):
+        import customer
+        c = customer.Customer()
         order_data = f"{product_id}|{name}|{price}|{quantity}|{category}\n"
         with open(ordersFilePath, "a") as file:
             file.write(order_data)
-            print(f"Ordered {quantity} of {name} for customer {product_id}")
+            print(f"Ordered {quantity} of {name} for {c.customer_id} {product_id}")
+
+    
+    def BrowseRegister(self):
+        import customer
+        c = customer.Customer()
+        customerName=input("Enter your name: ")
+        customerPhone=input("Enter your phone number: ")
+        customerAddress=input("Enter your address: ")
+        customerDob=input("Enter your date of birth: ")
+        c.register_customer(customerName,customerPhone,customerAddress,customerDob)
 
 
     def order_product(self):
@@ -105,7 +115,15 @@ class Product:
                         products.append(data)
                 product_id = int(input("Enter the number of the product you want to order: ")) - 1
                 quantity = int(input("Enter the quantity you want to order: "))
-                self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
+                if quantity > int(products[product_id][3]):
+                    print("Not enough stock")
+                    return
+                else:
+                    self.BrowseRegister()
+                    self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
+
+    
+    
 
 
 
