@@ -1,8 +1,13 @@
 from utility import *
 
+
+
 class Product:
     def __init__(self):
         pass
+    def EmptyProduct(self):
+        emptyProduct = False
+        return emptyProduct
         
     def add_product(self,product_id, name, price, quantity, category):
         self.product_id = self.GenerateProductId()
@@ -60,16 +65,22 @@ class Product:
             productCnt += 1
         product_Id = f"Product-{productCnt}"
         return product_Id
+
       
     def display_products(self):
         with open(productsFilePath, "r") as file:
-            print("Available Products:")
-            for i, line in enumerate(file, start=1):
-                if(line.strip() != None):
-                    print(f"\t{i}. {line.strip()}")
-                else:
-                    print("\tNo products available")
-                    break
+            lines = file.readlines()
+            if not lines:
+                print("No products available")
+                return False;
+            else:
+                print("Available Products:")
+                for i, line in enumerate(lines, start=1):
+                    data = line.strip().split('|')
+                    if len(data) > 4:
+                        print(f"\t{i}. Category: {data[4]}, Product Name: {data[1]}, Price: {data[2]}, Stock: {data[3]}")
+
+
                 
 
 
