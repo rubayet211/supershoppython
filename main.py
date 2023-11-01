@@ -287,9 +287,7 @@ def Login():
             else:
                 print("Invalid choice. Please select a valid option (1, 2, 3, or 4).")
     if userInput == 1:
-        print("Available Products:")
         product.display_products()
-        print("Choose the product that you want to purchase:")
     else:
         pass
 

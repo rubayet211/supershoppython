@@ -63,8 +63,14 @@ class Product:
       
     def display_products(self):
         with open(productsFilePath, "r") as file:
+            print("Available Products:")
             for i, line in enumerate(file, start=1):
-                print(f"\t{i}. {line.strip()}")
+                if(line.strip() != None):
+                    print(f"\t{i}. {line.strip()}")
+                else:
+                    print("\tNo products available")
+                    break
+                
 
 
     def checkout_product(self, product_id, name, price, quantity, category):

@@ -1,1 +1,4 @@
-
+Product-1|Pendrive|800|100|Electronics
+Product-2|Apple|20|100|Fruits
+Product-3|Football|260|10|Sports
+Product-4|Rose|5|200|Flower
