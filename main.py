@@ -287,11 +287,11 @@ def Login():
             else:
                 print("Invalid choice. Please select a valid option (1, 2, 3, or 4).")
     if userInput == 1:
-        if not product.display_products:  # If display_products returns False
+        if not product.order_product:  # If display_products returns False
             print("Exiting program due to no products available.")
             pause()
         else:
-            product.display_products()
+            product.order_product()
         
 
     else:

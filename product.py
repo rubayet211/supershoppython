@@ -67,25 +67,46 @@ class Product:
         return product_Id
 
       
-    def display_products(self):
+    # def display_products(self):
+    #     with open(productsFilePath, "r") as file:
+    #         lines = file.readlines()
+    #         if not lines:
+    #             print("No products available")
+    #             return False;
+    #         else:
+    #             print("Available Products:")
+    #             for i, line in enumerate(lines, start=1):
+    #                 data = line.strip().split('|')
+    #                 if len(data) > 4:
+    #                     print(f"\t{i}. Category: {data[4]}, Product Name: {data[1]}, Price: {data[2]}, Stock: {data[3]}")
+
+
+
+    def checkout_product(self, product_id, name, price, quantity, category):
+        order_data = f"{product_id}|{name}|{price}|{quantity}|{category}\n"
+        with open(ordersFilePath, "a") as file:
+            file.write(order_data)
+            print(f"Ordered {quantity} of {name} for customer {product_id}")
+
+
+    def order_product(self):
         with open(productsFilePath, "r") as file:
             lines = file.readlines()
             if not lines:
                 print("No products available")
-                return False;
+                return
             else:
                 print("Available Products:")
+                products = []
                 for i, line in enumerate(lines, start=1):
                     data = line.strip().split('|')
                     if len(data) > 4:
                         print(f"\t{i}. Category: {data[4]}, Product Name: {data[1]}, Price: {data[2]}, Stock: {data[3]}")
+                        products.append(data)
+                product_id = int(input("Enter the number of the product you want to order: ")) - 1
+                quantity = int(input("Enter the quantity you want to order: "))
+                self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
 
 
-                
 
-
-    def checkout_product(self, product_id, name, price, quantity, category):
-        order_data = f"{self.product_id}|{product_id}|{name}|{price}|{quantity}|{category}\n"
-        with open(ordersFilePath, "a") as file:
-            file.write(order_data)
-            print(f"Ordered {quantity} of {name} for customer {self.product_id}")
+    
