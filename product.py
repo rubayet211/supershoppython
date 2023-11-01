@@ -134,7 +134,8 @@ class Product:
                         print("3. Exit")
                         choice = int(input("Enter your choice: "))
                         if choice == 1:
-                            c.Login()
+                            uniqueID = input("Enter your Unique Login ID: ")
+                            c.Login(uniqueID)
                         elif choice == 2:
                             self.BrowseRegister()
                             self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
@@ -150,7 +151,8 @@ class Product:
                         print("3. Exit")
                         choice = int(input("Enter your choice: "))
                         if choice == 1:
-                            c.Login()
+                            uniqueID = input("Enter your Unique Login ID: ")
+                            c.Login(uniqueID)
                         elif choice == 2:
                             self.BrowseRegister()
                             self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])

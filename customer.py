@@ -109,16 +109,14 @@ class Customer(Person):
     
 
     def Login(self, customer_id):
-        with open(userFilePath, "r") as file:
+        with open(customerInfoPath, "r") as file:
             users = file.readlines()
-
         is_valid = False
         for user in users:
             user_info = user.split('|')
             if user_info[0] == customer_id:
                 is_valid = True
                 break
-
         if is_valid:
             self.customer_id = customer_id
             print(f"Customer {self.customer_id} logged in successfully")
