@@ -1,2 +1,0 @@
-Product-5|Speed|35|20|Drinks
-Product-4|Rose|5|20|Flower

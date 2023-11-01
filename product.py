@@ -100,6 +100,8 @@ class Product:
 
 
     def order_product(self):
+        import customer
+        c = customer.Customer()
         with open(productsFilePath, "r") as file:
             lines = file.readlines()
             if not lines:
@@ -119,9 +121,44 @@ class Product:
                     print("Not enough stock")
                     return
                 else:
-                    self.BrowseRegister()
-                    self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
-
+                    print("Do you have coupon code?")
+                    print("1. Yes")
+                    print("2. No")
+                    couponChoice = int(input("Enter your choice: "))
+                    if couponChoice == 1:
+                        couponCode = input("Enter Coupon Code : ")
+                        c.ApplyCoupon(couponCode)
+                        print("Register or Login to proceed to checkout:")
+                        print("1. Login")
+                        print("2. Register")
+                        print("3. Exit")
+                        choice = int(input("Enter your choice: "))
+                        if choice == 1:
+                            c.Login()
+                        elif choice == 2:
+                            self.BrowseRegister()
+                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
+                        elif choice == 3:
+                            return
+                        else:
+                            print("Invalid choice")
+                            return
+                    elif couponChoice == 2:
+                        print("Register or Login to proceed to checkout:")
+                        print("1. Login")
+                        print("2. Register")
+                        print("3. Exit")
+                        choice = int(input("Enter your choice: "))
+                        if choice == 1:
+                            c.Login()
+                        elif choice == 2:
+                            self.BrowseRegister()
+                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
+                        elif choice == 3:
+                            return
+                        else:
+                            print("Invalid choice")
+                            return
     
     
 

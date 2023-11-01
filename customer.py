@@ -17,20 +17,15 @@ class Customer(Person):
         self.dob = dob
         self.customer_id = self.generate_customer_id()
         customer_info = f"{self.customer_id}|{self.name}|{self.phone_number}|{self.address}|{self.dob}\n"
-        with open(userFilePath, "a") as file:
+        with open(customerInfoPath, "a") as file:
             file.write(customer_info)
         print(f"Customer {self.name} registered successfully with ID {self.customer_id}")
 
     def generate_customer_id(self):
         with open(userFilePath, "r") as file:
             lines = file.readlines()
-        customer_id = f"cust-{random.randint(1, 1000)}"
+        customer_id = random.randint(1, 10000)
         return customer_id
-
-
-    def BrowseProducts(self):
-        print("Available Products")
-        showProduct.display_products()
 
     def BuyProducts(self, customer_id, product_id, name, price, quantity, category):
         order_data = f"{self.customer_id}|{product_id}|{name}|{price}|{quantity}|{category}\n"
@@ -38,28 +33,6 @@ class Customer(Person):
             file.write(order_data)
             print(f"Ordered {quantity} of {name} for customer {self.customer_id}")
 
-    def CancelProducts(self, order_id):
-        # New file to store updated orders without the canceled order
-
-        with open(ordersFilePath, "r") as file:
-            orders = file.readlines()
-
-        with open(ordersFilePath, "w") as file:
-            for order in orders:
-                order_info = order.split('|')
-                if order_info[0] != order_id:
-                    file.write(order)
-
-    def TrackProducts(self):
-        # Display order status, expected delivery date, etc.
-        with open(ordersFilePath, "r") as file:
-            orders = file.readlines()
-
-        print("Order Status:")
-        for order in orders:
-            order_info = order.split('|')
-            if order_info[0] == self.customer_id:
-                print(f"Product: {order_info[2]}, Quantity: {order_info[4]}, Status: Shipped")
 
     def UpdateProfile(self, name, password, salary):
         # Implement profile update logic here
@@ -121,3 +94,34 @@ class Customer(Person):
                 file.write("|".join(order_info))
 
         print(f"Applied {applied_discount}% discount using coupon {coupon_code}")
+
+    def ViewOrders(self):
+        # Implement order view logic here
+        # Display the customer's orders
+        with open(ordersFilePath, "r") as file:
+            orders = file.readlines()
+
+        print("Orders:")
+        for order in orders:
+            order_info = order.split('|')
+            if order_info[0] == self.customer_id:
+                print(f"Product: {order_info[2]}, Quantity: {order_info[4]}, Price: {order_info[3]}")
+    
+
+    def Login(self, customer_id):
+        with open(userFilePath, "r") as file:
+            users = file.readlines()
+
+        is_valid = False
+        for user in users:
+            user_info = user.split('|')
+            if user_info[0] == customer_id:
+                is_valid = True
+                break
+
+        if is_valid:
+            self.customer_id = customer_id
+            print(f"Customer {self.customer_id} logged in successfully")
+        else:
+            print("Invalid customer ID")
+            return False
