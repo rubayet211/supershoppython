@@ -292,12 +292,8 @@ def Login():
             pause()
         else:
             product.order_product()
-            
-        
-
     else:
         pass
-
 
 # Login() #
 MainMenuInput()

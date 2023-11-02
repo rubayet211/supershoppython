@@ -64,29 +64,28 @@ class Product:
         product_Id = f"Product-{productCnt}"
         return product_Id
 
-      
-    # def display_products(self):
-    #     with open(productsFilePath, "r") as file:
-    #         lines = file.readlines()
-    #         if not lines:
-    #             print("No products available")
-    #             return False;
-    #         else:
-    #             print("Available Products:")
-    #             for i, line in enumerate(lines, start=1):
-    #                 data = line.strip().split('|')
-    #                 if len(data) > 4:
-    #                     print(f"\t{i}. Category: {data[4]}, Product Name: {data[1]}, Price: {data[2]}, Stock: {data[3]}")
+
+    def deduct_product_quantity(self, product_id, quantity_ordered):
+        with open(productsFilePath, "r") as file:
+            products = file.readlines()
+
+        with open(productsFilePath, "w") as file:
+            for product in products:
+                data = product.strip().split('|')
+                if data[0] == product_id:
+                    data[3] = str(int(data[3]) - int(quantity_ordered))
+                file.write("|".join(data) + "\n")
 
 
 
-    def checkout_product(self, product_id, name, price, quantity, category):
+    def checkout_product(self, product_id, name, price, quantity, category, customer_id):
         import customer
         c = customer.Customer()
-        order_data = f"{product_id}|{name}|{price}|{quantity}|{category}\n"
+        order_data = f"{product_id}|{name}|{price}|{quantity}|{category}|{customer_id}\n"
         with open(ordersFilePath, "a") as file:
             file.write(order_data)
-            print(f"Ordered {quantity} of {name} for {c.customer_id} {product_id}")
+            print(f"Customer-{customer_id} purchased {quantity} of {name}")
+            self.deduct_product_quantity(product_id, quantity)
 
     
     def BrowseRegister(self):
@@ -97,6 +96,7 @@ class Product:
         customerAddress=input("Enter your address: ")
         customerDob=input("Enter your date of birth: ")
         c.register_customer(customerName,customerPhone,customerAddress,customerDob)
+        return c.customer_id
 
 
     def order_product(self):
@@ -135,10 +135,11 @@ class Product:
                         choice = int(input("Enter your choice: "))
                         if choice == 1:
                             uniqueID = input("Enter your Unique Login ID: ")
-                            c.Login(uniqueID)
+                            customer_id=c.Login(uniqueID)
+                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id)
                         elif choice == 2:
-                            self.BrowseRegister()
-                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
+                            customer_id = self.BrowseRegister()
+                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id)
                         elif choice == 3:
                             return
                         else:
@@ -152,10 +153,11 @@ class Product:
                         choice = int(input("Enter your choice: "))
                         if choice == 1:
                             uniqueID = input("Enter your Unique Login ID: ")
-                            c.Login(uniqueID)
+                            customer_id=c.Login(uniqueID)
+                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id)
                         elif choice == 2:
-                            self.BrowseRegister()
-                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4])
+                            customer_id = self.BrowseRegister()
+                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id)
                         elif choice == 3:
                             return
                         else:

@@ -120,6 +120,7 @@ class Customer(Person):
         if is_valid:
             self.customer_id = customer_id
             print(f"Customer {self.customer_id} logged in successfully")
+            return customer_id
         else:
             print("Invalid customer ID")
             return False
