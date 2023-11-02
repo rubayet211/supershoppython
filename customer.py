@@ -1,9 +1,7 @@
 from person import Person
-from product import Product
 from utility import *
 import random
 
-showProduct = Product()
 
 class Customer(Person):
     def __init__(self)->None:
@@ -65,7 +63,7 @@ class Customer(Person):
                 if user_info[0] != self.user_id:
                     file.write(user)
 
-    def ApplyCoupon(self, coupon_code):
+    def ApplyCoupon(self, coupon_code, total_price):
         # Implement coupon application logic here
         # Check if the provided coupon code is valid
         with open(couponsFilePath, "r") as file:
@@ -81,33 +79,18 @@ class Customer(Person):
         # Apply the applicable discount to the order total
         with open(ordersFilePath, "r") as file:
             orders = file.readlines()
-
+        discounted_price = total_price
         with open(ordersFilePath, "w") as file:
             for order in orders:
                 order_info = order.split('|')
-                if order_info[0] == self.customer_id:
-                    order_price = float(order_info[3])
-                    order_quantity = int(order_info[4])
-                    total_price = order_price * order_quantity
+                if order_info[5] == self.customer_id:
                     discounted_price = total_price - (total_price * applied_discount / 100)
-                    order_info[3] = str(discounted_price)
+                    order_info[6] = str(discounted_price)
                 file.write("|".join(order_info))
+        print(f"Applied {applied_discount}% discount on Total Price-{total_price} using coupon {coupon_code}")
+        return discounted_price
 
-        print(f"Applied {applied_discount}% discount using coupon {coupon_code}")
-
-    def ViewOrders(self):
-        # Implement order view logic here
-        # Display the customer's orders
-        with open(ordersFilePath, "r") as file:
-            orders = file.readlines()
-
-        print("Orders:")
-        for order in orders:
-            order_info = order.split('|')
-            if order_info[0] == self.customer_id:
-                print(f"Product: {order_info[2]}, Quantity: {order_info[4]}, Price: {order_info[3]}")
     
-
     def Login(self, customer_id):
         with open(customerInfoPath, "r") as file:
             users = file.readlines()

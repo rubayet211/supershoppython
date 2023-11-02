@@ -1,3 +1,2 @@
-Product-4|Rose|5|20|Flower|544
-Product-4|Rose|5|20|Flower|4663
-Product-4|Rose|5|10|Flower|50.0
+Product-4|Rose|5|20|Flower|565|100.0
+Product-1|Pendrive|800|5|Electronics|544|95.0Product-2|Apple|20|2|Fruits|544|95.0Product-4|Rose|5|20|Flower|544|95.0

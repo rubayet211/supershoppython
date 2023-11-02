@@ -1,4 +1,7 @@
 from utility import *
+from customer import *
+
+c = Customer()
 
 class Product:
     def __init__(self):
@@ -79,19 +82,25 @@ class Product:
 
 
     def checkout_product(self, product_id, name, price, quantity, category, customer_id):
-        import customer
-        c = customer.Customer()
         total_price = float(price) * int(quantity)
         order_data = f"{product_id}|{name}|{price}|{quantity}|{category}|{customer_id}|{total_price}\n"
         with open(ordersFilePath, "a") as file:
             file.write(order_data)
             print(f"Customer-{customer_id} purchased {quantity} of {name}. Total price: {total_price}")
         self.deduct_product_quantity(product_id, quantity)
+        return total_price
+    
+    def checkout_coupon(self, product_id, name, price, quantity, category, customer_id, couponCode):
+        total_price = float(price) * int(quantity)
+        appliedPrice=c.ApplyCoupon(couponCode, total_price)
+        order_data = f"{product_id}|{name}|{price}|{quantity}|{category}|{customer_id}|{appliedPrice}\n"
+        with open(ordersFilePath, "a") as file:
+            file.write(order_data)
+            print(f"Customer-{customer_id} purchased {quantity} of {name}. Total price: {appliedPrice}")
+        self.deduct_product_quantity(product_id, quantity)
 
     
     def BrowseRegister(self):
-        import customer
-        c = customer.Customer()
         customerName=input("Enter your name: ")
         customerPhone=input("Enter your phone number: ")
         customerAddress=input("Enter your address: ")
@@ -101,8 +110,6 @@ class Product:
 
 
     def order_product(self):
-        import customer
-        c = customer.Customer()
         with open(productsFilePath, "r") as file:
             lines = file.readlines()
             if not lines:
@@ -128,7 +135,6 @@ class Product:
                     couponChoice = int(input("Enter your choice: "))
                     if couponChoice == 1:
                         couponCode = input("Enter Coupon Code : ")
-                        c.ApplyCoupon(couponCode)
                         print("Register or Login to proceed to checkout:")
                         print("1. Login")
                         print("2. Register")
@@ -137,10 +143,10 @@ class Product:
                         if choice == 1:
                             uniqueID = input("Enter your Unique Login ID: ")
                             customer_id=c.Login(uniqueID)
-                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id)
+                            self.checkout_coupon(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id, couponCode)
                         elif choice == 2:
                             customer_id = self.BrowseRegister()
-                            self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id)
+                            self.checkout_coupon(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id, couponCode)
                         elif choice == 3:
                             return
                         else:
