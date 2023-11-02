@@ -1,1 +1,3 @@
 Product-4|Rose|5|20|Flower|544
+Product-4|Rose|5|20|Flower|4663
+Product-4|Rose|5|10|Flower|50.0

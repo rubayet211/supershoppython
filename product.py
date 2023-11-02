@@ -81,11 +81,12 @@ class Product:
     def checkout_product(self, product_id, name, price, quantity, category, customer_id):
         import customer
         c = customer.Customer()
-        order_data = f"{product_id}|{name}|{price}|{quantity}|{category}|{customer_id}\n"
+        total_price = float(price) * int(quantity)
+        order_data = f"{product_id}|{name}|{price}|{quantity}|{category}|{customer_id}|{total_price}\n"
         with open(ordersFilePath, "a") as file:
             file.write(order_data)
-            print(f"Customer-{customer_id} purchased {quantity} of {name}")
-            self.deduct_product_quantity(product_id, quantity)
+            print(f"Customer-{customer_id} purchased {quantity} of {name}. Total price: {total_price}")
+        self.deduct_product_quantity(product_id, quantity)
 
     
     def BrowseRegister(self):
