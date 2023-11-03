@@ -18,6 +18,7 @@ class Customer(Person):
         with open(customerInfoPath, "a") as file:
             file.write(customer_info)
         print(f"Customer {self.name} registered successfully with ID {self.customer_id}")
+        return self.customer_id
 
     def generate_customer_id(self):
         with open(userFilePath, "r") as file:
@@ -65,8 +66,6 @@ class Customer(Person):
                     file.write(user)
 
     def ApplyCoupon(self, coupon_code, total_price):
-        # Implement coupon application logic here
-        # Check if the provided coupon code is valid
         with open(couponsFilePath, "r") as file:
             coupons = file.readlines()
 
@@ -76,18 +75,7 @@ class Customer(Person):
             if coupon_info[0] == coupon_code:
                 applied_discount = float(coupon_info[1])
                 break
-
-        # Apply the applicable discount to the order total
-        with open(ordersFilePath, "r") as file:
-            orders = file.readlines()
-        discounted_price = total_price
-        with open(ordersFilePath, "w") as file:
-            for order in orders:
-                order_info = order.split('|')
-                if order_info[5] == self.customer_id:
-                    discounted_price = total_price - (total_price * applied_discount / 100)
-                    order_info[6] = str(discounted_price)
-                file.write("|".join(order_info))
+        discounted_price = total_price - (total_price * applied_discount / 100)
         print(f"Applied {applied_discount}% discount on Total Price-{total_price} using coupon {coupon_code}")
         return discounted_price
 
