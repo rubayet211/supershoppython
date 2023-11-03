@@ -37,17 +37,18 @@ class Product:
             file.writelines(lines)
             print(f"Updated {self.name} in {self.category} with new price {self.price} and new quantity {self.quantity}")
 
-    def delete_product(self):
+    def delete_product(self, pid):
         lines = []
         with open(productsFilePath, "r") as file:
             for line in file:
                 data = line.strip().split('|')
-                if len(data) > 0 and data[0] != self.product_id:
+                if len(data) > 0 and data[0] != pid:
                     lines.append(line)
-
         with open(productsFilePath, "w") as file:
-            file.writelines(lines)
+            for line in lines:
+                file.write(line)
             print(f"Deleted product with id {self.product_id}")
+      
 
     def add_quantity(self, quantity):
         self.quantity += quantity
