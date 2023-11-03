@@ -224,28 +224,28 @@ def Login():
                                             pname = input("Enter Product Name : ")
                                             data[1] = pname
                                             newProductString = '|'.join(data)
-                                            product.UpdateProduct(pid,newProductString)
+                                            product.changeProductName(pid,newProductString)
                                             pause()
                                             break
                                         elif op == '2': # Quantity
                                             qty = input("Update Quantity : ")
                                             data[3] = qty
                                             newProductString = '|'.join(data)
-                                            product.UpdateProduct(pid,newProductString)
+                                            product.changeProductQuantity(pid,newProductString)
                                             pause()
                                             break
                                         elif op == '3': # Category 
                                             cat = input("Update Category : ")
                                             data[4] = cat
                                             newProductString = '|'.join(data)
-                                            product.UpdateProduct(pid,newProductString)
+                                            product.changeProductCategory(pid,newProductString)
                                             pause()
                                             break
                                         elif op == '4': # Price
                                             price = input("Update Price : ")
                                             data[2] = price
                                             newProductString = '|'.join(data)
-                                            product.UpdateProduct(pid,newProductString)
+                                            product.changeProductPrice(pid,newProductString)
                                             pause()
                                             break
                                         elif op == '5': #Back

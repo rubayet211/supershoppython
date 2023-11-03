@@ -26,7 +26,7 @@ class Customer(Person):
         return customer_id
 
     def BuyProducts(self, customer_id, product_id, name, price, quantity, category):
-        order_data = f"{self.customer_id}|{product_id}|{name}|{price}|{quantity}|{category}\n"
+        order_data = f"{customer_id}|{product_id}|{name}|{price}|{quantity}|{category}\n"
         with open(ordersFilePath, "a") as file:
             file.write(order_data)
             print(f"Ordered {quantity} of {name} for customer {self.customer_id}")
@@ -42,6 +42,7 @@ class Customer(Person):
         user_info = f"{self.user_id}|{self.password}|{self.name}|{self.join_date}|{self.salary}\n"
         with open(userFilePath, "a") as file:
             file.write(user_info)
+
 
     def ViewProfile(self):
         # Implement profile view logic here

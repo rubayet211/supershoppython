@@ -21,9 +21,11 @@ class Product:
             file.write(new_data)
             print(f"Added {self.name} to {self.category} with price {self.price} and quantity {self.quantity}")
 
-    def update_product(self, new_price, new_quantity):
+    def update_product(self, new_name, new_price, new_quantity, new_category):
+        self.name = new_name
         self.price = new_price
         self.quantity = new_quantity
+        self.category = new_category
 
         lines = []
         with open(productsFilePath, "r") as file:
@@ -36,6 +38,7 @@ class Product:
         with open(productsFilePath, "w") as file:
             file.writelines(lines)
             print(f"Updated {self.name} in {self.category} with new price {self.price} and new quantity {self.quantity}")
+
 
     def delete_product(self, pid):
         lines = []
@@ -58,6 +61,33 @@ class Product:
         if quantity <= self.quantity:
             self.quantity -= quantity
             self.update_product(self.price, self.quantity)
+
+
+    def changeProductName(self, pid, name):
+        self.product_id = pid
+        self.name = name
+        self.update_product(self.name, self.price, self.quantity, self.category)
+        print(f"Product name changed to {self.name}")
+
+    def changeProductPrice(self, pid, price):
+            self.product_id = pid
+            self.price = price
+            self.update_product(self.name, self.price, self.quantity, self.category)
+            print(f"Product price changed to {self.price}")
+
+    def changeProductQuantity(self, pid, quantity):
+        self.product_id = pid
+        self.quantity = quantity
+        self.update_product(self.name, self.price, self.quantity, self.category)
+        print(f"Product quantity changed to {self.quantity}")
+
+
+    def changeProductCategory(self, pid, category):
+        self.product_id = pid
+        self.category = category
+        self.update_product(self.name, self.price, self.quantity, self.category)
+        print(f"Product category changed to {self.category}")
+    
 
     def GenerateProductId(self):
         productCnt = 1
