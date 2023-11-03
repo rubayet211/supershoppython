@@ -1,32 +1,30 @@
 from utility import *
 
 class FinancialReport:
-    def __init__(self, ordersFilePath, expenditureFilePath, productsFilePath):
-        self.ordersFilePath = ordersFilePath
-        self.expenditureFilePath = expenditureFilePath
-        self.productsFilePath = productsFilePath
+    def __init__(self):
+        pass
 
     def calculate_total_revenue(self):
         total_revenue = 0
-        with open(self.ordersFilePath, "r") as file:
+        with open(ordersFilePath, "r") as file:
             for line in file:
                 data = line.strip().split('|')
-                price = float(data[3])
-                quantity = int(data[4])
-                total_revenue += price * quantity
+                price = float(data[6])
+                total_revenue += price
         return total_revenue
 
     def calculate_total_expenditure(self):
         total_expenditure = 0
-        with open(self.expenditureFilePath, "r") as file:
+        with open(expenditureFilePath, "r") as file:
             for line in file:
-                expenditure = float(line.strip())
+                data = line.strip().split('|')
+                expenditure= float(data[1])
                 total_expenditure += expenditure
         return total_expenditure
 
     def calculate_total_products(self):
         total_products = 0
-        with open(self.productsFilePath, "r") as file:
+        with open(productsFilePath, "r") as file:
             for line in file:
                 data = line.strip().split('|')
                 quantity = int(data[3])
@@ -44,5 +42,3 @@ class FinancialReport:
         print(f"Total expenditure: {total_expenditure}")
         print(f"Net profit: {net_profit}")
 
-report = FinancialReport(ordersFilePath, expenditureFilePath, productsFilePath)
-report.generate_report()

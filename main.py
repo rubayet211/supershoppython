@@ -4,6 +4,7 @@ from product import Product
 from utility import *
 from employee import *
 from customer import *
+from sales import *
 import os
 import sys
 
@@ -84,6 +85,7 @@ admin = Admin()
 employee = Employee()
 product = Product()
 customer = Customer()
+report = FinancialReport()
 MainMenu()
 userInput=0
 
@@ -175,9 +177,10 @@ def Login():
                             admin.MyProfile(userFilePath,userId)
                             pause()
                         elif option == 5: # View Sales 
-                            pass
+                            report.generate_report()
                         elif option == 6: # View A Customer
-                            pass                
+                            checkCustomer= input("Enter Customer Id : ")
+                            customer.viewCustomer(checkCustomer)                
                                          
                 else: # Login Failed Try again
                     pause()
@@ -249,7 +252,7 @@ def Login():
                                 data = line.split('|')
                                 if(data[0] == pid):
                                     found = True
-                                    product.deleteProduct(pid)
+                                    product.delete_product(pid)
                                     pause()
                             if found == False:
                                 print("Product Not Found!!")

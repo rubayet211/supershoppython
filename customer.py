@@ -107,3 +107,21 @@ class Customer(Person):
         else:
             print("Invalid customer ID")
             return False
+        
+    def viewCustomer(self,customer_id):
+        with open(customerInfoPath, "r") as file:
+            users = file.readlines()
+        is_valid = False
+        for user in users:
+            user_info = user.split('|')
+            if user_info[0] == customer_id:
+                print(f"Customer ID: {user_info[0]}")
+                print(f"Name: {user_info[1]}")
+                print(f"Phone Number: {user_info[2]}")
+                print(f"Address: {user_info[3]}")
+                print(f"DOB: {user_info[4]}")
+                break
+            else:
+                print("Invalid customer ID")
+                break
+        
