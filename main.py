@@ -281,7 +281,9 @@ def Login():
                             employee.MyProfile(userId)
                             pause()
                         elif option == 8: # View a Customer
-                            pass
+                            checkCustomer= input("Enter Customer Id : ")
+                            customer.viewCustomer(checkCustomer) 
+                            pause()
                         else:
                             print("Invalid Input!")
                             pause() 
