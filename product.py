@@ -21,11 +21,11 @@ class Product:
             file.write(new_data)
             print(f"Added {self.name} to {self.category} with price {self.price} and quantity {self.quantity}")
 
-    def update_product(self, new_name, new_price, new_quantity, new_category):
-        self.name = new_name
-        self.price = new_price
-        self.quantity = new_quantity
-        self.category = new_category
+    def update_product(self, name, price, quantity, category):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.category = category
 
         lines = []
         with open(productsFilePath, "r") as file:

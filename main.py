@@ -177,7 +177,7 @@ def Login():
                                 print(f"{empUserId} not found!!")
                             pause()
                         elif option == 4: # My profile
-                            admin.MyProfile(userFilePath,userId)
+                            admin.MyProfile(userId)
                             pause()
                         elif option == 5: # View Sales
                             print("View Financial Report")
