@@ -122,7 +122,10 @@ def Login():
                 if admin.Auth(userId,password) == True:
                     while True:
                         AdminShowMenu()
-                        option = int(input("Enter your choice: "))
+                        try:
+                            option = int(input("Enter your choice: "))
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
                         if option == 7:
                             break
                         elif option == 1: # add employee
@@ -134,7 +137,7 @@ def Login():
                             pause()
                         elif option == 2: # Update Employee
                             empUserId = input("Enter employee userId you want to update: ")
-                            
+
                             f = open(userFilePath, "r")
                             foundEmp = False                      
                             for emp in f:
@@ -176,11 +179,14 @@ def Login():
                         elif option == 4: # My profile
                             admin.MyProfile(userFilePath,userId)
                             pause()
-                        elif option == 5: # View Sales 
+                        elif option == 5: # View Sales
+                            print("View Financial Report")
                             report.generate_report()
+                            pause()
                         elif option == 6: # View A Customer
                             checkCustomer= input("Enter Customer Id : ")
-                            customer.viewCustomer(checkCustomer)                
+                            customer.viewCustomer(checkCustomer) 
+                            pause()               
                                          
                 else: # Login Failed Try again
                     pause()

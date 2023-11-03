@@ -120,8 +120,9 @@ class Customer(Person):
                 print(f"Phone Number: {user_info[2]}")
                 print(f"Address: {user_info[3]}")
                 print(f"DOB: {user_info[4]}")
+                is_valid = True
                 break
-            else:
-                print("Invalid customer ID")
-                break
+        if not is_valid:
+            print("Invalid customer ID")
+
         
