@@ -1,5 +1,6 @@
 from utility import *
 from customer import *
+import sys
 
 c = Customer()
 
@@ -179,7 +180,7 @@ class Product:
                             customer_id = self.BrowseRegister()
                             self.checkout_coupon(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id, couponCode)
                         elif choice == 3:
-                            return
+                            sys.exit()
                         else:
                             print("Invalid choice")
                             return
@@ -197,7 +198,7 @@ class Product:
                             customer_id = self.BrowseRegister()
                             self.checkout_product(products[product_id][0], products[product_id][1], products[product_id][2], quantity, products[product_id][4], customer_id)
                         elif choice == 3:
-                            return
+                            sys.exit()
                         else:
                             print("Invalid choice")
                             return

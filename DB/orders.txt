@@ -1,4 +1,5 @@
-Product-4|Rose|5|20|Flower|565|47.5Product-1|Pendrive|800|5|Electronics|544|95.0
+Product-4|Rose|5|20|Flower|565|47.5
+Product-1|Pendrive|800|5|Electronics|544|95.0
 Product-2|Apple|20|2|Fruits|544|95.0
 Product-4|Rose|5|20|Flower|544|95.0
 Product-4|Rose|5|20|Flower|544|95.0
@@ -9,3 +10,5 @@ Product-1|Pendrive|800|10|Electronics|3568|7600.0
 Product-2|Apple|20|10|Fruits|3756|0
 Product-2|Apple|20|10|Fruits|6400|200.0
 Product-2|Apple|20|8|Fruits|311|152.0
+Product-3|Football|260|2|Sports|544|520.0
+Product-5|Speed|35|15|Drinks|9723|525.0
