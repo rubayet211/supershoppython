@@ -1,2 +1,0 @@
-
-print(current_date)
