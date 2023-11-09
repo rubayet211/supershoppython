@@ -17,3 +17,4 @@ Product-1|Pendrive|800|20|Electronics|7290|15200.0
 Product-3|Football|260|2|Sports|544|520.0
 Product-4|Rose|5|10|Flower|7785|50.0
 Product-4|Rose|5|10|Flower|544|47.5
+Product-5|Speed|35|10|Drinks|7093|332.5

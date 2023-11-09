@@ -26,44 +26,6 @@ class Customer(Person):
         customer_id = random.randint(1, 10000)
         return customer_id
 
-    def BuyProducts(self, customer_id, product_id, name, price, quantity, category):
-        order_data = f"{customer_id}|{product_id}|{name}|{price}|{quantity}|{category}\n"
-        with open(ordersFilePath, "a") as file:
-            file.write(order_data)
-            print(f"Ordered {quantity} of {name} for customer {self.customer_id}")
-
-
-    def UpdateProfile(self, name, password, salary):
-        # Implement profile update logic here
-        # Update the customer's profile information
-        self.name = name
-        self.password = password
-        self.salary = salary
-        # Save the updated profile to the user file
-        user_info = f"{self.user_id}|{self.password}|{self.name}|{self.join_date}|{self.salary}\n"
-        with open(userFilePath, "a") as file:
-            file.write(user_info)
-
-
-    def ViewProfile(self):
-        # Implement profile view logic here
-        # Display the customer's profile information
-        print(f"Customer ID: {self.customer_id}")
-        print(f"Name: {self.name}")
-        print(f"Salary: {self.salary}")
-        # You can add more profile information to display
-
-    def DeleteProfile(self):
-        # Implement profile deletion logic here
-        # Remove the customer's profile from the user file
-        with open(userFilePath, "r") as file:
-            users = file.readlines()
-
-        with open(userFilePath, "w") as file:
-            for user in users:
-                user_info = user.split('|')
-                if user_info[0] != self.user_id:
-                    file.write(user)
 
     def ApplyCoupon(self, coupon_code, total_price):
         with open(couponsFilePath, "r") as file:

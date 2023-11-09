@@ -203,7 +203,7 @@ def Login():
                         option = int(input("Enter your choice: "))
                         if option == 9: # Back
                             break
-                        elif option == 1: # Add Product
+                        elif option == 1: 
                             productName = input("Enter Product Name : ")
                             productPrice = input("Enter Price : ")
                             productQuantity = input("Enter Quantity : ")
