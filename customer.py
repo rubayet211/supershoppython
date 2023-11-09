@@ -21,7 +21,7 @@ class Customer(Person):
         return self.customer_id
 
     def generate_customer_id(self):
-        with open(userFilePath, "r") as file:
+        with open(customerInfoPath, "r") as file:
             lines = file.readlines()
         customer_id = random.randint(1, 10000)
         return customer_id
