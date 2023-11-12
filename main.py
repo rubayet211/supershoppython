@@ -8,7 +8,6 @@ from sales import *
 import os
 import sys
 
-### All Utility Methods
 def option():
     print("\n### Press any option and hit enter ###")
 def MainMenu():
@@ -71,16 +70,6 @@ def pause():
     input()
     
 
-
-
-
-    
-
-## main area
-
-## All Variable Creation
-
-#All Object Creation
 admin = Admin()
 employee = Employee()
 product = Product()
@@ -111,14 +100,11 @@ def Login():
         LoginOption()
         while True:
             choice = input("Enter your choice: ")
-            # choice = '2' ##
 
-            if choice == '1': # Login as Admin
-                #Login As admin
+            if choice == '1': 
+
                 userId = input("Enter UserId: ")
                 password = input("Enter Password: ")
-                # userId = "admin-1"
-                # password = "123"
                 if admin.Auth(userId,password) == True:
                     while True:
                         AdminShowMenu()
@@ -128,16 +114,15 @@ def Login():
                             print("Invalid input. Please enter a number.")
                         if option == 7:
                             break
-                        elif option == 1: # add employee
+                        elif option == 1: 
                             empName = input("Employee Name : ")
                             empPassword = input("Employee Password : ")
                             empSalary = input("Employee Salary : ")
                             admin.AddingEmployee(empName,empPassword,empSalary)
                             print("Employee Added!!!")
                             pause()
-                        elif option == 2: # Update Employee
+                        elif option == 2:
                             empUserId = input("Enter employee userId you want to update: ")
-
                             f = open(userFilePath, "r")
                             foundEmp = False                      
                             for emp in f:
@@ -169,39 +154,37 @@ def Login():
                             if foundEmp == False:
                                 print("No Employee Found!!")
                                 pause()
-                        elif option == 3: # Deleting Employee 
+                        elif option == 3: 
                             empUserId = input("Enter employee userId you want to delete: ")
                             if(admin.DeletingEmployee(userFilePath,empUserId)):
                                 print(f"{empUserId} is deleted successfully!!")
                             else:
                                 print(f"{empUserId} not found!!")
                             pause()
-                        elif option == 4: # My profile
+                        elif option == 4: 
                             admin.MyProfile(userId)
                             pause()
-                        elif option == 5: # View Sales
+                        elif option == 5: 
                             print("View Financial Report")
                             report.generate_report()
                             pause()
-                        elif option == 6: # View A Customer
+                        elif option == 6:
                             checkCustomer= input("Enter Customer Id : ")
                             customer.viewCustomer(checkCustomer) 
                             pause()               
                                          
-                else: # Login Failed Try again
+                else: 
                     pause()
                     Login()
                 break
-            elif choice == '2': # Login as Employee
+            elif choice == '2':
                 userId = input("Enter UserId: ")
                 password = input("Enter Password: ")
-                # userId = "admin-1"1
-                # password = "123"
                 if employee.Auth(userId,password) == True:
                     while True:
                         EmployeeShowMenu()
                         option = int(input("Enter your choice: "))
-                        if option == 9: # Back
+                        if option == 9: 
                             break
                         elif option == 1: 
                             productName = input("Enter Product Name : ")
@@ -211,7 +194,7 @@ def Login():
                             productId = product.GenerateProductId()
                             product.add_product(productId,productName,productPrice,productQuantity,productCategory)
                             pause()
-                        elif option == 2: # Update Product
+                        elif option == 2:
                             pid = input("Enter Product Id : ")
                             f = open(productsFilePath,'r')
                             for line in f:
@@ -220,37 +203,37 @@ def Login():
                                     while True:
                                         UpdateProductMenu()
                                         op = input("Enter option : ")
-                                        if op == '1': # Name
+                                        if op == '1':
                                             pname = input("Enter Product Name : ")
                                             data[1] = pname
                                             newProductString = '|'.join(data)
                                             product.changeProductName(pid,newProductString)
                                             pause()
                                             break
-                                        elif op == '2': # Quantity
+                                        elif op == '2':
                                             qty = input("Update Quantity : ")
                                             data[3] = qty
                                             newProductString = '|'.join(data)
                                             product.changeProductQuantity(pid,newProductString)
                                             pause()
                                             break
-                                        elif op == '3': # Category 
+                                        elif op == '3': 
                                             cat = input("Update Category : ")
                                             data[4] = cat
                                             newProductString = '|'.join(data)
                                             product.changeProductCategory(pid,newProductString)
                                             pause()
                                             break
-                                        elif op == '4': # Price
+                                        elif op == '4': 
                                             price = input("Update Price : ")
                                             data[2] = price
                                             newProductString = '|'.join(data)
                                             product.changeProductPrice(pid,newProductString)
                                             pause()
                                             break
-                                        elif op == '5': #Back
+                                        elif op == '5': 
                                             break
-                        elif option == 3: # Delete Product
+                        elif option == 3: 
                             pid = input("Enter Product Id : ")
                             f = open(productsFilePath,'r')
                             found = False
@@ -263,24 +246,24 @@ def Login():
                             if found == False:
                                 print("Product Not Found!!")
                                 pause()
-                        elif option == 4: # Add Expenditure
+                        elif option == 4: 
                             purpose = input("Enter Purpose of Enpense : ")                            
                             amount = input("Enter Amount :  ")          
                             employee.CreateExpenditure(purpose,amount)
                             pause()
-                        elif option == 5: # Add coupon
+                        elif option == 5: 
                             couponCode = input("Enter Coupon Code : ")
                             percent = input("Enter percent of discount : ")
                             expiryDate = input("Enter expiry date (yyyy-mm-dd) : ")
                             employee.CreateCoupon(couponCode,percent,expiryDate)
                             pause()
-                        elif option == 6: # Clear All Expired Coupon
+                        elif option == 6: 
                             employee.ClearAllExpiredCoupon()
                             pause()
-                        elif option == 7: # My profile
+                        elif option == 7: 
                             employee.MyProfile(userId)
                             pause()
-                        elif option == 8: # View a Customer
+                        elif option == 8: 
                             checkCustomer= input("Enter Customer Id : ")
                             customer.viewCustomer(checkCustomer) 
                             pause()
@@ -298,7 +281,7 @@ def Login():
             else:
                 print("Invalid choice. Please select a valid option (1, 2, 3, or 4).")
     if userInput == 1:
-        if not product.order_product:  # If display_products returns False
+        if not product.order_product:  
             print("Exiting program due to no products available.")
             pause()
         else:
@@ -306,6 +289,5 @@ def Login():
     else:
         pass
 
-# Login() #
 MainMenuInput()
 Login()

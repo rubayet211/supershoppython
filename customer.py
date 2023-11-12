@@ -59,6 +59,7 @@ class Customer(Person):
             print("Invalid customer ID")
             return False
         
+        
     def viewCustomer(self,customer_id):
         with open(customerInfoPath, "r") as file:
             users = file.readlines()
