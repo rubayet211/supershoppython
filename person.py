@@ -7,9 +7,9 @@ class Person:
     def __init__(self) -> None:
         pass
             
-    def RegisterUser(self,name,password,salary,admin):
+    def RegisterUser(self,name,password,salary):
         self.name = name
-        self.userId = self.GenerateUserId(admin)
+        self.userId = self.GenerateUserId()
         self.password = password
         self.salary = salary
         current_date = datetime.date.today()
@@ -34,13 +34,6 @@ class Person:
         return loggedIn
 
     
-        
-    def AddingProducts(self):
-        pass
-    def UpdatingProduct(self):
-        pass
-    def DeletingProduct(self):
-        pass
     
     def MyProfile(self,myId):
         f = open(userFilePath,'r')
@@ -68,21 +61,15 @@ class Person:
         pass
     
     #support classes
-    def GenerateUserId(self,admin):
+    def GenerateUserId(self):
         f = open(userFilePath, "r")
         
         userId = ""
         userCnt = 1
-        if admin == True:
-            for line in f:
-                if "admin" in line:
-                    userCnt += 1
-            userId = f"admin-{userCnt}"
-        else:
-            for line in f:
-                if "emp" in line:
-                    userCnt += 1
-            userId = f"emp-{userCnt}"
+        for line in f:
+            if "emp" in line:
+                userCnt += 1
+        userId = f"emp-{userCnt}"
         return userId        
         
         

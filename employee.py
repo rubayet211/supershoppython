@@ -1,5 +1,4 @@
 from datetime import datetime
-# import datetime
 from person import Person
 from utility import *
 

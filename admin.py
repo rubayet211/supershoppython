@@ -5,7 +5,7 @@ class Admin(Person):
         super().__init__()
         
     def AddingEmployee(self,name,password,salary):
-        super().RegisterUser(name,password,salary,True)
+        super().RegisterUser(name,password,salary)
         
 
     def UpdatingEmployee(self,file_path, empUserId, new_content):
